@@ -6,6 +6,9 @@ var todoCountSpan = document.querySelector("#todo-count");
 var todos = ["Learn HTML", "Learn CSS", "Learn JavaScript"];
 
 function renderTodos() {
+  // clear existing todos
+todoList.innerHTML = ""
+  // rerender todos
   for(var i = 0; i < todos.length; i++) {
     // create li element
     var li = document.createElement('li')
@@ -15,5 +18,20 @@ function renderTodos() {
     todoList.appendChild(li)
   }
 }
+
+function addTodos(event) {
+  event.preventDefault()
+// todoInput get input value
+var newTodo = todoInput.value;
+if(newTodo !== "") {
+  // push the text into todoes
+  todos.push(newTodo);
+  // clear input after user pressed enter
+  todoInput.value = ""
+  // call renderTodos ()
+  renderTodos();
+}};
+
+todoForm.addEventListener('submit', addTodos)
 
 renderTodos()
