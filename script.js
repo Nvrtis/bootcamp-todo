@@ -14,10 +14,15 @@ todoList.innerHTML = ""
     var li = document.createElement('li')
     //  add todo text to li
     li.innerText = todos[i]
+    // add data-index attribute
+    li.setAttribute('data', i)
+    // create button
+    var button = document.createElement('button')
+    button.innerText = 'Complete'
+    li.appendChild(button)
     // append li to todoList
     todoList.appendChild(li)
-  }
-}
+  }};
 
 function addTodos(event) {
   event.preventDefault()
@@ -32,6 +37,20 @@ if(newTodo !== "") {
   renderTodos();
 }};
 
-todoForm.addEventListener('submit', addTodos)
+function removeTodo(event) {
+  console.log(event.target)
+  var target = event.target
+  if (target.matches('button')) {
+    // find index from li
+  var index = parseInt(target.parentNode.getAttribute('data-index'))
+    // remove the todo from todos array
+todos.splice(index, 1)
+    // re-render todos
+  }
+renderTodos()
+}
+
+todoForm.addEventListener('submit', addTodos);
+todoList.addEventListener('click', removeTodo)
 
 renderTodos()
